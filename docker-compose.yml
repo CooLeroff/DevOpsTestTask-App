@@ -1,0 +1,45 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+  backend:
+    depends_on:
+      - mongo
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: backend
+    restart: always
+    ports:
+      - 8111:80
+    environment:
+      MONGODB_USERNAME: root
+      MONGODB_PASSWORD: example
+      MONGODB_PORT: 27017
+      MONGODB_URL: mongo
+
+  frontend:
+    depends_on:
+      - mongo 
+      - backend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    stdin_open: true # docker run -i (But why?)
+    tty: true        # docker run -t (But why?)
+    image: frontend
+    restart: always
+    ports:
+      - 3000:3000
+    environment:
+      REACT_APP_BACKEND_URL: http://localhost:8111
