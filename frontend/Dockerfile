@@ -1,13 +1,24 @@
-FROM node:14
+# Build stage
+FROM node:14.17-alpine as build
 
 WORKDIR /app
 
-COPY package.json .
+COPY package.json ./
 
 RUN npm install
 
 COPY . .
 
-ENV REACT_APP_BACKEND_URL=http://localhost
+RUN npm run build
 
-CMD ["npm", "start"]
+# Staging
+FROM nginx:1.21-alpine
+
+COPY --from=build /app/build /usr/share/nginx/html
+
+# Copy NGINX configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
