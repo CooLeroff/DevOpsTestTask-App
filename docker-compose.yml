@@ -3,7 +3,7 @@ version: '3.1'
 
 services:
   mongo:
-    image: mongo
+    image: mongo:6.0.7
     restart: always
     ports:
       - 27017:27017
@@ -42,3 +42,23 @@ services:
       - 3000:3000
     environment:
       REACT_APP_BACKEND_URL: http://localhost:8111
+    profiles:
+      - local
+
+  frontend_production:
+    depends_on:
+      - mongo 
+      - backend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile_production
+    stdin_open: true # docker run -i (But why?)
+    tty: true        # docker run -t (But why?)
+    image: frontend
+    restart: always
+    ports:
+      - 80:80
+    environment:
+      REACT_APP_BACKEND_URL: http://localhost:8111
+    profiles:
+      - production
