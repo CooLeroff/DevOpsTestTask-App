@@ -33,12 +33,12 @@ services:
       - backend
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile_local
     stdin_open: true # docker run -i (But why?)
     tty: true        # docker run -t (But why?)
     image: frontend
     restart: always
     ports:
-      - 80:80
+      - 3000:3000
     environment:
       REACT_APP_BACKEND_URL: http://localhost:8111
