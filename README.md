@@ -1,5 +1,7 @@
 # Exquance DevOps test task
 
+[![DevOps_App_Deploy](https://github.com/CooLeroff/DevOps_test_task/actions/workflows/docker-image.yml/badge.svg)](https://github.com/CooLeroff/DevOps_test_task/actions/workflows/docker-image.yml)
+
 ## Application description
 
 "Goals" application consist of 2 parts: backend (Node.js app) and frontend (React app). Applications interacts with each other via REST API. Backend also connects to MongoDB to store data (user goals).
