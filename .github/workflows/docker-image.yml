@@ -9,7 +9,6 @@ on:
 jobs:
 
   build:
-
     runs-on: self-hosted
 
     steps:
@@ -18,13 +17,24 @@ jobs:
       run: docker compose  build --no-cache backend
     - name: Build Frontend App
       run: docker compose  build --no-cache frontend_production
+
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
     - name: Build Backend App
       run: docker compose --profile production up
+
+  test:
+    needs: deploy
+    runs-on: self-hosted
+    steps:
     - name: Build and Run Tests for Frontend App
       run: |
         docker build -t app_test -f frontend/Dockerfile_local frontend
         docker run -d --name app_test_container app_test
         docker exec app_test_container npm test -- --watchAll=false --passWithNoTests
         docker rm app_test -f
+
     - name: Docker Images CleanUp
       run: docker image prune -a -f
