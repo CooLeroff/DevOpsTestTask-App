@@ -9,7 +9,7 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build
+RUN npm run build --verbose
 
 # Staging
 FROM nginx:1.21-alpine
