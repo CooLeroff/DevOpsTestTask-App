@@ -28,3 +28,14 @@ Environment variables to configure app:
 Environment variables to configure app:
 
 - REACT_APP_BACKEND_URL - url of backend REST API.
+
+## Local run
+
+Use ```docker compose``` for build and run the application locally.
+
+Make sure you have docker and docker compose installed to run, otherwise see the installation documentation.: https://docs.docker.com/engine/install/
+
+Opent terminal in root of project and run
+```docker compose up --profile local```
+
+## CI Deploy
