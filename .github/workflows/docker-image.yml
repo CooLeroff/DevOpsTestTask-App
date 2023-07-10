@@ -9,7 +9,7 @@ on:
 jobs:
 
   build:
-    runs-on: [self-hosted, arm64]
+    runs-on: [ self-hosted , mytesthost ]
 
     steps:
     - uses: actions/checkout@v3
@@ -22,8 +22,8 @@ jobs:
     needs: build
     runs-on: self-hosted
     steps:
-    - name: Build Backend App
-      run: docker compose --profile production up
+    - name: Deploy and start app
+      run: docker compose --profile production up -d
 
   test:
     needs: deploy
