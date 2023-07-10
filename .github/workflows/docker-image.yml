@@ -14,23 +14,22 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build Backend App
-      run: docker compose  build --no-cache backend
+      run: docker compose build --no-cache backend
+    - name: Get host IP and set as env var
+      run: |
+        HOST_IP=$(curl -s https://api.ipify.org)
+        echo "HOST_IP=$HOST_IP" >> "$GITHUB_ENV"
+      env:
+          REACT_APP_BACKEND_URL: "http://${{ env.HOST_IP }}:8111"    
     - name: Build Frontend App
-      run: docker compose  build --no-cache frontend_production
+      run: docker compose build --no-cache frontend_production
 
   deploy:
     needs: build
     runs-on: [ self-hosted , mytesthost ]
     steps:
-    - name: Get host IP and set as env var
-      run: |
-        HOST_IP=$(curl -s https://api.ipify.org)
-        echo "HOST_IP=$HOST_IP" >> "$GITHUB_ENV"  
     - name: Deploy and start app
-      run: docker compose --profile production up -d
-      env:
-          REACT_APP_BACKEND_URL: "http://${{ env.HOST_IP }}:8111"
-        
+      run: docker compose --profile production up -d        
 
   test:
     needs: deploy

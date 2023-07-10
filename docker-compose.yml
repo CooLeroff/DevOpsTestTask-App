@@ -59,6 +59,6 @@ services:
     ports:
       - 80:80
     environment:
-      - REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}
+      - REACT_APP_BACKEND_URL
     profiles:
       - production
