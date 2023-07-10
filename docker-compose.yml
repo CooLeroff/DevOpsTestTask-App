@@ -1,6 +1,8 @@
 version: '3.1'
 
 services:
+
+### Profiles for local build ###
   mongo:
     image: mongo:4.4.18
     restart: always
@@ -11,20 +13,6 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
     profiles:
       - local
-
-  mongo_production:
-    image: mongo:4.4.18
-    restart: always
-    ports:
-      - 27017:27017
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-    volumes:
-      - /data/db:/data/db
-      - /var/backups/mongodb:/data/backup
-    profiles:
-      - production
 
   backend:
     build:
@@ -38,7 +26,9 @@ services:
       MONGODB_USERNAME: root
       MONGODB_PASSWORD: example
       MONGODB_PORT: 27017
-      MONGODB_URL: mongo_production
+      MONGODB_URL: mongo
+    profiles:
+      - local
 
   frontend:
     depends_on:
@@ -57,11 +47,43 @@ services:
       REACT_APP_BACKEND_URL: http://localhost:8111
     profiles:
       - local
-  
+
+### Profiles for production build ###
+
+  mongo_production:
+    image: mongo:4.4.18
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - /data/db:/data/db
+      - /var/backups/mongodb:/data/backup
+    profiles:
+      - production
+
+  backend_production:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: backend
+    restart: always
+    ports:
+      - 8111:80
+    environment:
+      MONGODB_USERNAME: root
+      MONGODB_PASSWORD: example
+      MONGODB_PORT: 27017
+      MONGODB_URL: mongo_production
+    profiles:
+      - production
+
   frontend_production:
     depends_on:
       - mongo_production 
-      - backend
+      - backend_production
     build:
       context: ./frontend
       dockerfile: Dockerfile_production
