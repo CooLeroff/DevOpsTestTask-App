@@ -25,11 +25,11 @@ jobs:
     - name: Get host IP and set as env var
       run: |
         HOST_IP=$(curl -s https://api.ipify.org)
-        echo "HOST_IP=$HOST_IP" >> $GITHUB_ENV  
+        echo "HOST_IP=$HOST_IP" >> "$GITHUB_ENV"  
     - name: Deploy and start app
       run: docker compose --profile production up -d
       env:
-          REACT_APP_BACKEND_URL: "http://${{ secrets.HOST_IP }}:8111"
+          REACT_APP_BACKEND_URL: "http://${{ env.HOST_IP }}:8111"
         
 
   test:
@@ -41,7 +41,7 @@ jobs:
         docker build -t app_test -f frontend/Dockerfile_local frontend
         docker run -d --name app_test_container app_test
         docker exec app_test_container npm test -- --watchAll=false --passWithNoTests
-        docker rm app_test -f
+        docker rm app_test_container -f
 
     - name: Docker Images CleanUp
       run: docker image prune -a -f
