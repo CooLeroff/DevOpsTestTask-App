@@ -4,7 +4,7 @@ This is a test task repository with using Docker, Docker Compose, build JS frame
 
 [![DevOps_App_Deploy](https://github.com/CooLeroff/DevOps_test_task/actions/workflows/docker-image.yml/badge.svg)](https://github.com/CooLeroff/DevOps_test_task/actions/workflows/docker-image.yml)
 
-##Tasks:
+## Tasks:
 
 - [x] Dockerise application to make possible to run it on the server.
 - [x] Create CI/CD on Github actions to build and deploy each part of the application (frontend and backend separately). Plus create step to run frontend app tests (command to run tests can be taken from README.md of frontend app).
