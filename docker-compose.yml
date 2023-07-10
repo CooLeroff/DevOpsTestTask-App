@@ -52,13 +52,13 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile_production
+      args:
+        REACT_APP_BACKEND_URL: $(REACT_APP_BACKEND_URL)
     stdin_open: true # docker run -i (But why?)
     tty: true        # docker run -t (But why?)
     image: frontend
     restart: always
     ports:
       - 80:80
-    environment:
-      - REACT_APP_BACKEND_URL
     profiles:
       - production
