@@ -1,4 +1,4 @@
-# Exquance DevOps test task
+# DevOps test task (CI)
 
 This is a test task repository with using Docker, Docker Compose, build JS frameworks. 
 
@@ -40,7 +40,7 @@ After start you can open http://localhost:3000/ to use app
 
 ----
 
-For stop local run aplication use command:
+For stop local aplication use command:
 ```docker compose down --remove-orphans --volumes```
 
 ### CI Deploy
