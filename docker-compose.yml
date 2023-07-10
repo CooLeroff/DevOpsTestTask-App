@@ -12,9 +12,23 @@ services:
     profiles:
       - local
 
+  mongo_production:
+    image: mongo:4.4.18
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - /data/db:/data/db
+      - /var/backups/mongodb:/data/backup
+    profiles:
+      - production
+
   backend:
     depends_on:
-      - mongo
+      - mongo_production
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -46,20 +60,6 @@ services:
     profiles:
       - local
   
-  mongo_production:
-    image: mongo:4.4.18
-    restart: always
-    ports:
-      - 27017:27017
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-    volumes:
-      - /data/db:/data/db
-      - /var/backups/mongodb:/data/backup
-    profiles:
-      - production
-
   frontend_production:
     depends_on:
       - mongo 

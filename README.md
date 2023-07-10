@@ -1,8 +1,13 @@
 # Exquance DevOps test task
 
+This is a test task repository with using Docker, Docker Compose, build JS frameworks. 
+
 [![DevOps_App_Deploy](https://github.com/CooLeroff/DevOps_test_task/actions/workflows/docker-image.yml/badge.svg)](https://github.com/CooLeroff/DevOps_test_task/actions/workflows/docker-image.yml)
 
-### Application description
+###Tasks:
+
+- [x] Dockerise application to make possible to run it on the server.
+- [x] Create CI/CD on Github actions to build and deploy each part of the application (frontend and backend separately). Plus create step to run frontend app tests (command to run tests can be taken from README.md of frontend app).
 
 "Goals" application consist of 2 parts: backend (Node.js app) and frontend (React app). Applications interacts with each other via REST API. Backend also connects to MongoDB to store data (user goals).
 
