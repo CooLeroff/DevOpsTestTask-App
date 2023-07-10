@@ -58,7 +58,7 @@ services:
     restart: always
     ports:
       - 80:80
-    environment:
-      REACT_APP_BACKEND_URL: http://localhost:8111
+#    environment:
+#      REACT_APP_BACKEND_URL: http://localhost:8111
     profiles:
       - production
