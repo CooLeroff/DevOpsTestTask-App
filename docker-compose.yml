@@ -38,7 +38,7 @@ services:
       MONGODB_USERNAME: root
       MONGODB_PASSWORD: example
       MONGODB_PORT: 27017
-      MONGODB_URL: mongo
+      MONGODB_URL: mongo_production
 
   frontend:
     depends_on:
