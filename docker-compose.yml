@@ -27,8 +27,6 @@ services:
       - production
 
   backend:
-    depends_on:
-      - mongo_production
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -62,7 +60,7 @@ services:
   
   frontend_production:
     depends_on:
-      - mongo 
+      - mongo_production 
       - backend
     build:
       context: ./frontend
