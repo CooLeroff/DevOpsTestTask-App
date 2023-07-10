@@ -39,7 +39,9 @@ jobs:
       run: |
         docker build -t app_test -f frontend/Dockerfile_local frontend
         docker run -d --name app_test_container app_test
+        echo "Runing tests using Jest framework by run command "npm test""
         docker exec app_test_container npm test -- --watchAll=false --passWithNoTests
+        echo "Remove container after tests"
         docker rm app_test_container -f
 
     - name: Docker Images CleanUp
