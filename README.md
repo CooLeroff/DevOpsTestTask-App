@@ -13,7 +13,7 @@ This is a test task repository with using Docker, Docker Compose, build JS frame
 
 User can add goals and delete them.
 
-###Dockerised environment
+###Dockerized environment
 The application consists of three docker containers:
 
 - MongoDB (For compatibility reasons uses version 4.4.18)

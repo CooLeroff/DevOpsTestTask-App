@@ -14,7 +14,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build Backend App
-      run: docker compose build --no-cache backend
+      run: MONGODB_URL=mongo_production docker compose build --no-cache backend
     - name: Get host IP and set as env var
       run: |
         HOST_IP=$(curl -s https://api.ipify.org)
