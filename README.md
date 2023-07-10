@@ -4,7 +4,7 @@ This is a test task repository with using Docker, Docker Compose, build JS frame
 
 [![DevOps_App_Deploy](https://github.com/CooLeroff/DevOps_test_task/actions/workflows/docker-image.yml/badge.svg)](https://github.com/CooLeroff/DevOps_test_task/actions/workflows/docker-image.yml)
 
-###Tasks:
+##Tasks:
 
 - [x] Dockerise application to make possible to run it on the server.
 - [x] Create CI/CD on Github actions to build and deploy each part of the application (frontend and backend separately). Plus create step to run frontend app tests (command to run tests can be taken from README.md of frontend app).
@@ -13,14 +13,14 @@ This is a test task repository with using Docker, Docker Compose, build JS frame
 
 User can add goals and delete them.
 
-###Dockerized environment
+## Dockerized environment
 The application consists of three docker containers:
 
 - MongoDB (For compatibility reasons uses version 4.4.18)
 - Backend application 
 - Frontend application (with dev run mode (**npm start**) and production mode (**npm build)** )
 
-### Local run
+## Local run
 
 You can use ```docker compose``` for build and run the application locally.
 
@@ -43,7 +43,7 @@ After start you can open http://localhost:3000/ to use app
 For stop local aplication use command:
 ```docker compose down --remove-orphans --volumes```
 
-### CI Deploy
+## CI Deploy
 
 This repository is prepared for use in the CI GitHub Actions environment
 
@@ -66,7 +66,7 @@ Apps have dockerfiles to build images for them.
 
 To make frontend app start and work correctly you need to run container with `-it` flags.
 
-### Backend app
+## Backend app
 
 port: **8111**
 
@@ -77,7 +77,7 @@ Environment variables to configure app:
 - MONGODB_URL - url of MongoDB server.
 - MONGODB_PORT - port of MongoDB server.
 
-### Frontend app
+## Frontend app
 
 port: **80**
 
