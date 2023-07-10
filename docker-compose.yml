@@ -11,6 +11,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
     volumes:
+      - mongo-data:/data/db
       - /var/backups/mongodb:/data/backup
 
   backend:
